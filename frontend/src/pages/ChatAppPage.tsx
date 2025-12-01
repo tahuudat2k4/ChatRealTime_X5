@@ -1,4 +1,4 @@
-import Signout from "@/components/auth/signout";
+import Signout from "@/components/auth/Signout";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 const ChatAppPage = () => {
