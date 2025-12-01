@@ -161,7 +161,7 @@ export const refreshToken = async (req, res) => {
         // Return new access token to the client
         return res.status(200).json({
             success: true,
-            newAccessToken
+            accessToken: newAccessToken
         });
     } catch (error) {
         console.error("Error during token refresh:", error);
