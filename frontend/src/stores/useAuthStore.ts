@@ -19,6 +19,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             loading: false,
         });
     },
+    // Sign up new user
     signUp: async (firstName, lastName, username, email, password) => {
         try {
             set({ loading: true });
@@ -32,6 +33,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             set({ loading: false });
         }
     },
+    // Sign in existing user
     signIn: async (username, password) => {
         try {
             set({ loading: true });
@@ -48,6 +50,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             set({ loading: false });
         }
     },
+    // Sign out current user
     signOut: async () => {
         try {
             // clear auth state first
@@ -60,6 +63,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             toast.error("Đăng xuất thất bại. Vui lòng thử lại.");
         }
     },
+    // Fetch current user info
     fetchMe: async () => {
         try {
             set({ loading: true });
@@ -73,6 +77,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             set({ loading: false });
         }
     },
+    // Refresh access token
     refresh: async () => {
         try {
             set({ loading: true });

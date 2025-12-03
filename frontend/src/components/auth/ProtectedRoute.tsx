@@ -14,14 +14,14 @@ const ProtectedRoute = () => {
       }
       // Initialization complete
       setStarting(false);
-    }
+    };
     // On component mount, initialize auth state
     useEffect(() => {
       init();
     }, []);
     // If still loading, you can return a loading indicator here
     if( starting || loading ){
-        return <div className='flex h-screen items-center justify-center'>Đang tải trang...</div>;
+        return (<div className='flex h-screen items-center justify-center'>Đang tải trang...</div>);
     }
     // If no access token, redirect to signin page
     if(!accessToken){

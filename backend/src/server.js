@@ -7,6 +7,8 @@ import userRoute from './routes/userRoute.js';
 import cookieParser from 'cookie-parser';
 import { protectedRoute } from './middlewares/authMiddleware.js';
 import cors from 'cors';
+import friendRoute from './routes/friendRoute.js';
+import messageRoute from './routes/messageRoute.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -27,6 +29,8 @@ app.use('/api/auth', authRoute);
 app.use(protectedRoute);
 // Private routes
 app.use('/api/users', userRoute);
+app.use('/api/friends', friendRoute);
+app.use('/api/messages', messageRoute);
 // Connect to the database
 connectDB().then(() => {
     // Running the server
