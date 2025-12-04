@@ -49,7 +49,25 @@ export const sendDirectMessage = async (req, res) => {
 // Send a message to a group conversation
 export const sendGroupMessage = async (req, res) => {
     try {
-        
+        const { conversationId, content } = req.body;
+        const senderId = req.user._id;
+
+        const conversation = req.conversation;
+        if(!content) {
+          return res.status(400).json({ message: "Lack of information" });
+        }
+
+        const message = await Message.create({
+          conversationId,
+          senderId,
+          content
+        });
+        updateConversationAfterCreateMessage(conversation, message, senderId);
+        await conversation.save();
+        return res.status(201).json({
+          success: true,
+          message
+        })
     } catch (error) {
         console.error('Error sending group message:', error);
         res.status(500).json({ error: 'Internal server error' });

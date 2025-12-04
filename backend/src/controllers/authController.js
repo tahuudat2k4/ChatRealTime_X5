@@ -33,7 +33,7 @@ export const signUp = async (req, res) => {
             username,
             hashedPassword,
             email,
-            displayName: `${firstName} ${lastName}`
+            displayName: `${lastName} ${firstName}`
         })
         // Respond with success
         return res.status(204).json({
