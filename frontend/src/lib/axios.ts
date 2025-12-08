@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Create an Axios instance with default configurations
 const api = axios.create({
-    baseURL: import.meta.env.MODE === 'development' ? 'http://localhost:5001/api': 'api',
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true, // Include cookies in requests
 });
 // approach access token to request header if exists

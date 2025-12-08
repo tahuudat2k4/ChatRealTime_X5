@@ -1,6 +1,7 @@
 import Message from '../models/Message.js';
 import Conversation from '../models/Conversation.js';
-import {updateConversationAfterCreateMessage} from '../utils/messageHelper.js';
+import {emitNewMessage, updateConversationAfterCreateMessage} from '../utils/messageHelper.js';
+import { io } from '../socket/index.js'; 
 
 // Send a direct message from one user to another
 export const sendDirectMessage = async (req, res) => {
@@ -40,6 +41,8 @@ export const sendDirectMessage = async (req, res) => {
 
     await conversation.save();
 
+    emitNewMessage(io, conversation, message);
+
     return res.status(201).json({ message })
     } catch (error) {
         console.error('Error sending direct message:', error);
@@ -64,6 +67,7 @@ export const sendGroupMessage = async (req, res) => {
         });
         updateConversationAfterCreateMessage(conversation, message, senderId);
         await conversation.save();
+        emitNewMessage(io, conversation, message);
         return res.status(201).json({
           success: true,
           message

@@ -10,11 +10,10 @@ import cors from 'cors';
 import friendRoute from './routes/friendRoute.js';
 import messageRoute from './routes/messageRoute.js';
 import conversationRoute from './routes/conversationRoute.js';
+import {app, server} from './socket/index.js';
 
 // Load environment variables from .env file
 dotenv.config();
-// Create an Express application
-const app = express();
 // Define a port from environment variables or default to 5001
 const PORT = process.env.PORT || 5001;
 // Middleware to parse JSON requests
@@ -36,7 +35,7 @@ app.use('/api/conversations', conversationRoute);
 // Connect to the database
 connectDB().then(() => {
     // Running the server
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log(chalk.black.bgMagenta(`👽 Server is running on http://localhost: ${PORT} !`));
     })
 });
